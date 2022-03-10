@@ -1,3 +1,8 @@
+
+rock.addEventListener('click', playRound('ROCK', computerPlay()));
+paper.addEventListener('click', playRound('PAPER', computerPlay()));
+scissors.addEventListener('click', playRound('SCISSORS', computerPlay()));
+
 function computerPlay () { //Takes the random number between 1 and 3 and returns rock/paper/scissors
     let randomNumber = Math.floor(Math.random()*3)+1; //Selects a random number between 1 and 3
     if (randomNumber === 1) {
@@ -35,10 +40,10 @@ function game() {
     let playerScore = 0;
     let computerScore = 0
     let repeated = false;
-    alert("Ready for a game of Rock Paper Scissors? Let's play best 3 out of 5!");
-    for (let i = 0; i < 5; i++) {
-        let playerSelection = prompt("Rock, paper, or scissors?").toUpperCase();
-        const computerSelection = computerPlay();
+//    alert("Ready for a game of Rock Paper Scissors? Let's play best 3 out of 5!");
+//    for (let i = 0; i < 5; i++) {
+//        let playerSelection = prompt("Rock, paper, or scissors?").toUpperCase();
+//        const computerSelection = computerPlay();
         console.log(computerSelection);
         playRound(playerSelection, computerSelection);
         if (playerSelection === computerSelection) {
@@ -59,18 +64,13 @@ function game() {
             computerScore ++;
             console.log("You lost this round! Player's score: " + playerScore + ", Computer's score: " + computerScore);
         }
-        if (parseInt(playerScore) === 3) {
-            console.log("Congratulations! You have won!");
-            break;
-        } else if (parseInt(computerScore) === 3) {
-            console.log("You have lost the game!");
-            break;
-        }
     }
-}
+//}
 
 game();
 
 //changes I have made to solve problem of not having specified rounds:
     //moved the randomNumber variable inside computerPlay
     //moved the playerSelection and computerSelection inside the for loop (which really makes sense to do)
+
+
