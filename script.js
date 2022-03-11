@@ -3,7 +3,9 @@ let computerScore = 0;
 let playerSelection = '';
 let computerSelection;
 
-checkWinner(); 
+checkWinner();
+
+//Event listeners for the buttons and their game() fxn
 const rockBtn = document.querySelector('#rock');
 const paperBtn = document.querySelector('#paper');
 const scissorsBtn = document.querySelector('#scissors');
@@ -28,7 +30,7 @@ scissorsBtn.addEventListener('click', ()=>{
 
 
 
-//Scoreboard
+//Scoreboard creation
 const container = document.querySelector("#container");
 const playerResults = document.createElement('div');
 playerResults.classList.add('resultDisplay');
@@ -50,7 +52,7 @@ function computerPlay () { //Takes the random number between 1 and 3 and returns
     }
 }
 
-function playRound (playerSelection, computerSelection) {
+function playRound (playerSelection, computerSelection) { //Determines the winner of a single round
     if (computerSelection === 'ROCK' && playerSelection === 'ROCK') {
         return 'Rock vs. rock, it\'s a tie!';
     } else if (computerSelection === 'ROCK' && playerSelection === 'PAPER') {
