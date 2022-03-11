@@ -1,8 +1,4 @@
 
-rock.addEventListener('click', playRound('ROCK', computerPlay()));
-paper.addEventListener('click', playRound('PAPER', computerPlay()));
-scissors.addEventListener('click', playRound('SCISSORS', computerPlay()));
-
 function computerPlay () { //Takes the random number between 1 and 3 and returns rock/paper/scissors
     let randomNumber = Math.floor(Math.random()*3)+1; //Selects a random number between 1 and 3
     if (randomNumber === 1) {
@@ -32,24 +28,38 @@ function playRound (playerSelection, computerSelection) {
     } else if (computerSelection === 'SCISSORS' && playerSelection === 'PAPER') {
         return 'Scissors beats paper, you lose!';
     } else if (computerSelection === 'SCISSORS' && playerSelection === 'SCISSORS') {
-        return 'Scissosrs vs. scissors, it\'s a tie!';
+        return 'Scissors vs. scissors, it\'s a tie!';
     }
 }
 
 function game() {
     let playerScore = 0;
     let computerScore = 0
-    let repeated = false;
-//    alert("Ready for a game of Rock Paper Scissors? Let's play best 3 out of 5!");
+    let winnersScore = 0;
 //    for (let i = 0; i < 5; i++) {
-//        let playerSelection = prompt("Rock, paper, or scissors?").toUpperCase();
-//        const computerSelection = computerPlay();
-        console.log(computerSelection);
-        playRound(playerSelection, computerSelection);
+        const computerSelection = computerPlay();
+        let playerSelection = '';
+        const rockBtn = document.querySelector('#rock');
+        const paperBtn = document.querySelector('#paper');
+        const scissorsBtn = document.querySelector('#scissors');
+        rockBtn.addEventListener('click', ()=>{ 
+            playerSelection = 'ROCK';
+            playRound(playerSelection, computerSelection);
+            console.log('Button click: ' + playerSelection);
+        }); //to call fxn w/ parameter in a event listener, use empty fxn to call fxn
+        paperBtn.addEventListener('click', ()=>{ 
+            playerSelection = 'PAPER';
+            playRound(playerSelection, computerSelection);
+            console.log('Button click: ' + playerSelection);
+        });
+        scissorsBtn.addEventListener('click', ()=>{ 
+            playerSelection = 'SCISSORS';
+            playRound(playerSelection, computerSelection);
+            console.log('Button click: ' + playerSelection);
+        });
         if (playerSelection === computerSelection) {
             //If the result is a tie and the round repeats
-            repeated = true;
-            i--;
+//            i--;
             console.log("This round was a tie! Player's score: " + playerScore + ", Computer's score: " + computerScore);
         } else if ((computerSelection === 'ROCK' && playerSelection === 'PAPER') || 
                     (computerSelection === 'PAPER' && playerSelection === 'SCISSORS') || 
@@ -57,15 +67,29 @@ function game() {
             //If player wins a round
             playerScore ++;
             console.log("You won this round! Player's score: " + playerScore + ", Computer's score: " + computerScore);
+            appendResults();
         } else if ((computerSelection === 'ROCK' && playerSelection === 'SCISSORS') || 
                     (computerSelection === 'PAPER' && playerSelection === 'ROCK') || 
                     (computerSelection === 'SCISSORS' && playerSelection === 'PAPER')) {
             //If player loses a round
             computerScore ++;
             console.log("You lost this round! Player's score: " + playerScore + ", Computer's score: " + computerScore);
+            appendResults();
         }
     }
 //}
+
+function appendResults () {
+    const container = document.querySelector("#container");
+    const playerResults = document.createElement('div');
+    playerResults.classList.add('resultDisplay');
+    playerResults.textContent = `Player\'s score: ${playerScore}`;
+    container.appendChild(playerResults);
+    const computerResults = document.createElement('div');
+    computerResults.classList.add('resultDisplay');
+    computerResults.textContent = `Computer\'s score: ${computerScore}`;
+    container.appendChild(computerResults);
+}
 
 game();
 
